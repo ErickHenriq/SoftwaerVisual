@@ -1,0 +1,79 @@
+*
+{
+    font-family: "Vernada", sans-serif;
+	text-decoration: none
+}
+
+.titulo{
+    font-size: 45px;
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    color: #229954;
+}
+
+.form{
+    box-shadow: 0 0 1px 0;
+	position: relative;
+	margin: 50px auto;
+	max-width: 320px;
+	padding: 30px;
+	text-align: center;
+	z-index: 1;
+}
+
+.form input
+{
+	background: #F2F3F4;
+	box-sizing: border-box;
+	margin-bottom: 15px;
+}
+
+
+.form text
+{
+    font-size: 40px;
+    color: #196F3D;
+}
+
+.form button,input
+{
+	border: 0;
+	font-size: 14px;
+	outline: 0;
+	padding: 20px;
+	width: 100%;
+}
+
+.form button
+{
+	font-weight: bold;
+	font-size: 20px;
+	background: #2ECC71 ;
+	color: #FFFFFF;
+	cursor: pointer;
+}
+
+.form button:active
+{
+	background: #196F3D;
+}
+
+.erro-input
+{
+	border: solid 1px red;
+}
+
+.form p {
+	box-shadow: 0 0 1px 0;
+	position: relative;
+	margin: 10px auto;
+	max-width: 320px;
+	padding: 15px;
+	text-align: center;
+	z-index: 1;
+	text-decoration: none;
+}
+.form a{
+	color: #196F3D;
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Locadora de Ternos</title> 
+        <link rel="stylesheet" href="style.css">
+		<script src="script.js"></script>s
+    </head>
+
+    <body>
+        <div class="titulo">
+            <text>Seja bem vindo!</text>
+        </div>
+        <div class="form">
+            <text>Cadastro de Locações</text><br><br>
+            <input id="idLocador" placeholder="Id do Locador" type="text" onblur="validaidLocador(this.id)"/>
+            <input id="idTerno" placeholder="Id do Terno" type="text" onblur="validaidTerno(this.id)"/>
+
+            <button onclick="cadastrarLocacao()">Cadastrar Locação</button>
+
+            <p>Ir para <a href="listarLocacao.html">Lista de Locações</a></p>
+            <p>Ir para <a href="listarTernos.html">Lista de Ternos</a></p>
+            <p>Ir para <a href="listarLocador.html">Lista de Locadores</a></p>
+        </div>
+    </body>
+</html>

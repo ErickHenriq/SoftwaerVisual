@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Locadora de Ternos</title> 
+        <link rel="stylesheet" href="style.css">
+		<script src="script.js"></script>
+    </head>
+
+    <body>
+        <div class="titulo">
+            <text>Seja bem vindo!</text>
+        </div>
+        <div class="form">
+            <text>Cadastro de Locadores</text><br><br>
+            <input id="cpf" placeholder="Cpf" type="text" onblur="validaCpf(this.id)"/>
+            <input id="nome" placeholder="Nome do Locador" type="text" onblur="validaNomeLocador(this.id)"/>
+
+            <button onclick="cadastrarLocador()">Cadastrar Locador</button>
+            
+            <p>Ir para <a href="listarLocacao.html">Lista de Locações</a></p>
+            <p>Ir para <a href="listarTernos.html">Lista de Ternos</a></p>
+            <p>Ir para <a href="listarLocador.html">Lista de Locadores</a></p>
+
+        </div>
+    </body>
+</html>
