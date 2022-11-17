@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "doH6r5IFYOEP1I5a0Wyk2bwvsSajcmII4VP4HJufEIf8W52S/X+7aEz4qKSIRuumqclZkyYVn0l2GOW6D8bFUQ==",
+  "dgSpecHash": "BvtrHdgO/ZPjnTZsyuwCMBDGtKSkiP57NAaFhiv1mLzJkzN7m/VG2thPDbIKpcn0AfsW8Hzx2tE6AFgakH6gbw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2\\Trabalho 2\\LocadoraDeTernos\\LocadoraDeTernos.csproj",
+  "projectFilePath": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2 - Versão Rafael 1\\Trabalho 2 JavaScript\\backend\\LocadoraDeTernos\\LocadoraDeTernos.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pc-user\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Pc-user\\.nuget\\packages\\microsoft.data.sqlite.core\\6.0.0\\microsoft.data.sqlite.core.6.0.0.nupkg.sha512",

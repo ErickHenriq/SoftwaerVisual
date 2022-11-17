@@ -1,282 +1,29 @@
 var url = 'http://localhost:3000/'
 
-let body = {
-	//TERNO
-	'Modelo':            	document.getElementById('modelo').value,
-	'Cor':               	document.getElementById('cor').value,
-	'Tamanho':           	document.getElementById('tamanho').value,
-	'Status':          	 	document.getElementById('status').value,
-
-	//LOCADOR
-	'Cpf':            		document.getElementById('cpf').value,
-	'Nome':           		document.getElementById('nome').value,
-
-	//LOCACAO
-	'IdLocador':            document.getElementById('idLocador').value,
-	'IdTerno':           	document.getElementById('idTerno').value,
-
-}
-
-// FUNÇÕES LOCAÇÕES ---
-
-function cadastrarLocacao(){
-	if(!validaidLocador(idLocador)){
-		return
-	}
-
-	if(!validaidTerno(idTerno)){
-		return
-	}
-
-}
-	//json
-
-
-	fetch(url + "locacoes",
-	{
-		'method': 'POST',
-		'redirect': 'follow',
-		'headers':
-		{
-			'Content-Type': 'application/json',
-			'Accept': 'application/json'
-		},
-		'body': JSON.stringify(body)
-	})
-
-	.then((response) =>
-	{
-		if(response.ok)
-		{
-			return response.text()
-		}
-		else
-		{
-			return response.text().then((text) =>
-			{
-				throw new Error(text)
-			})
-		}
-	})
-
-	.then((output) =>
-	{
-		console.log(output)
-		alert('Locação cadastrada com sucesso!')
-	})
-
-	.catch((error) =>
-	{
-		console.log(error)
-		alert('Não foi possivel cadastrar a locação!')
-	})
-
-
-function validaidLocador(id){
-	let divIdLocador = document.getElementById(idLocador)
-	if(divIdLocador.value.trim().split(' ').length >= 2)
-	{
-		divIdLocador.classList.remove('erro-input')
-		return true
-	}
-	else
-	{
-		if(!divIdLocador.classList.contains('erro-input'))
-		{
-			divIdLocador.classList.add('erro-input')
-		}
-		return false
-	}
-}
-
-function validaidTerno(id){
-	let divIdTerno = document.getElementById(idTerno)
-	if(divIdTerno.value.trim().split(' ').length >= 2)
-	{
-		divIdTerno.classList.remove('erro-input')
-		return true
-	}
-	else
-	{
-		if(!divIdTerno.classList.contains('erro-input'))
-		{
-			divIdTerno.classList.add('erro-input')
-		}
-		return false
-	}
-}
-
-function listarLocacao(){
-    fetch(url + 'locacoes')
-    .then(response => response.json())
-	.then((locacoes) => {
-        let listaLocacoes = document.getElementById('lista-locacoes')
-
-        while(listaLocacoes.firstChild){
-            listaLocacoes.removeChild(listaLocacoes.firstChild)
-        }
-
-        for(let locacao of locacoes){
-            let divLocacoes = document.createElement('div')
-            divLocacoes.setAttribute('class', 'form')
-
-            let divIdLocador = document.createElement('input')
-			divIdLocador.placeholder = 'IdLocador'
-			divIdLocador.value = locacao.idLocador
-			divLocacoes.appendChild(divIdLocador)
-
-            let divIdTerno = document.createElement('input')
-			divIdTerno.placeholder = 'IdTerno'
-			divIdTerno.value = locacao.idTerno
-			divLocacoes.appendChild(divIdTerno)
-
-            //botão remove
-            let btnRemover = document.createElement('button')
-			btnRemover.innerHTML = 'Remover'
-			btnRemover.onclick = u => remover(locacao.id)
-			btnRemover.style.marginRight = '5px'
-
-            //botão atualizar
-            let btnAtualizar = document.createElement('button')
-			btnAtualizar.innerHTML = 'Atualizar'
-			btnAtualizar.onclick = u => atualizar(locacao.id, divIdLocador, divIdTerno)
-			btnAtualizar.style.marginLeft = '5px'
-
-            //div com botoes
-            let divBotoes = document.createElement('div')
-			divBotoes.style.display = 'flex'
-			divBotoes.appendChild(btnRemover)
-			divBotoes.appendChild(btnAtualizar)
-			divUsuario.appendChild(divBotoes)
-
-            listaLocacoes.appendChild(divLocacoes)
-        }
-    })
-}
-
-function atualizarLocacao(id, divIdLocador, divIdTerno)
-{
-	let body =
-	{
-		'IdLocador': divIdLocador.value,
-		'IdTerno': divIdTerno.value,
-	}
-	
-	fetch(url + "locacoes/" + id,
-	{
-		'method': 'PUT',
-		'redirect': 'follow',
-		'headers':
-		{
-			'Content-Type': 'application/json',
-			'Accept': 'application/json'
-		},
-		'body': JSON.stringify(body)
-	})
-	.then((response) =>
-	{
-		if(response.ok)
-		{
-			return response.text()
-		}
-		else
-		{
-			return response.text().then((text) =>
-			{
-				throw new Error(text)
-			})
-		}
-	})
-	.then((output) =>
-	{
-		listarLocacao()
-		console.log(output)
-		alert('Locação Atualizada!')
-	})
-	.catch((error) =>
-	{
-		console.log(error)
-		alert('Não foi possível atualizar Locação!')
-	})
-}
-
-function removerLocacao(id)
-{
-	fetch(url + 'locacoes/' + id,
-	{
-		'method': 'DELETE',
-		'redirect': 'follow'
-	})
-	.then((response) =>
-	{
-		if(response.ok)
-		{
-			return response.text()
-		}
-		else
-		{
-			return response.text().then((text) =>
-			{
-				throw new Error(text)
-			})
-		}
-	})
-	.then((output) =>
-	{
-		listarLocacao()
-		console.log(output)
-		alert('Locação Removida!')
-	})
-	.catch((error) =>
-	{	
-		listarLocacao()
-		console.log(error)
-		alert('Não foi possível remover a Locação!')
-	})
-}
-
-
-function option()
-{
-	
-	fetch(url + 'locacoes')
-	.then(response => response.json())
-	.then((locacoes) =>
-	{
-		let selLocacoes = document.getElementById('option-locacoes')
-				
-		for(let locacao of locacoes)
-		{
-			let optLocacao = document.createElement('option')
-			optLocacao.innerHTML = locacao.idLocador
-			optLocacao.value = locacao.id
-			selLocacoes.appendChild(optLocacao)
-		}
-	})
-}
-
-
 // FUNÇÕES TERNOS --- 
 
-function cadastrarterno(){ //validação dos inputs
-    if(!validaModelo(modelo)){
+function cadastrarTerno(){ //validação dos inputs
+    if(!validaModelo('modelo')){
         return
     }
 
-    if(!validaCor(cor)){
+    if(!validaCor('cor')){
         return
     }
 
-    if(!validaTamanho(tamanho)){
+    if(!validaTamanho('tamanho')){
         return
     }
 
-}
-    //json
-
-    
-
-    fetch(url + "ternos",
+	let body = {
+		//TERNO
+		'Modelo':            	document.getElementById('modelo').value,
+		'Cor':               	document.getElementById('cor').value,
+		'Tamanho':           	document.getElementById('tamanho').value,
+		'Status':          	 	document.getElementById('status').value,
+	};
+	
+    fetch(url + "terno/cadastrar",
 	{
 		'method': 'POST',
 		'redirect': 'follow',
@@ -315,9 +62,17 @@ function cadastrarterno(){ //validação dos inputs
 		alert('Não foi possivel cadastrar o terno!')
 	})
 
-function validaModelo(id){
-    let divModelo = document.getElementById(modelo)
-	if(divModelo.value.trim().split(' ').length >= 2)
+}
+    //json
+
+    
+
+
+function validaModelo(id)
+{
+    let divModelo = document.getElementById(id)
+	
+	if(divModelo.value.trim().length >= 0)
 	{
 	    divModelo.classList.remove('erro-input')
 	    return true
@@ -333,8 +88,8 @@ function validaModelo(id){
 }
 
 function validaCor(id){
-    let divCor = document.getElementById(cor)
-    if(divCor.value.trim().split(' ').length >= 2)
+    let divCor = document.getElementById(id)
+    if(divCor.value.trim().length >= 0)
     {
     divCor.classList.remove('erro-input')
     return true
@@ -350,8 +105,8 @@ function validaCor(id){
 }
 
 function validaTamanho(id){
-    let divTamanho = document.getElementById(tamanho)
-    if(divTamanho.value.trim().split(' ').length >= 2)
+    let divTamanho = document.getElementById(id)
+    if(divTamanho.value.trim().length >= 0)
     {
     divTamanho.classList.remove('erro-input')
     return true
@@ -398,13 +153,13 @@ function listarTerno(){
             //botão remove
             let btnRemover = document.createElement('button')
 			btnRemover.innerHTML = 'Remover'
-			btnRemover.onclick = u => remover(terno.id)
+			btnRemover.onclick = u => removerTerno(terno.id)
 			btnRemover.style.marginRight = '5px'
 
             //botão atualizar
             let btnAtualizar = document.createElement('button')
 			btnAtualizar.innerHTML = 'Atualizar'
-			btnAtualizar.onclick = u => atualizar(terno.id, divModelo, divCor, divTamanho)
+			btnAtualizar.onclick = u => atualizarTerno(terno.id, divModelo, divCor, divTamanho)
 			btnAtualizar.style.marginLeft = '5px'
 
             //div com botoes
@@ -412,7 +167,7 @@ function listarTerno(){
 			divBotoes.style.display = 'flex'
 			divBotoes.appendChild(btnRemover)
 			divBotoes.appendChild(btnAtualizar)
-			divUsuario.appendChild(divBotoes)
+			divTernos.appendChild(divBotoes)
 
             listaTernos.appendChild(divTernos)
         }
@@ -428,7 +183,7 @@ function atualizarTerno(id, divModelo, divCor, divTamanho)
 		'Tamanho': divTamanho.value
 	}
 	
-	fetch(url + "ternos/" + id,
+	fetch(url + "terno/atualizar/" + id,
 	{
 		'method': 'PUT',
 		'redirect': 'follow',
@@ -468,7 +223,7 @@ function atualizarTerno(id, divModelo, divCor, divTamanho)
 
 function removerTerno(id)
 {
-	fetch(url + 'ternos/' + id,
+	fetch(url + 'terno/deletar/' + id,
 	{
 		'method': 'DELETE',
 		'redirect': 'follow'
@@ -523,18 +278,25 @@ function option()
 // FUNÇÕES LOCADORES ---
 
 function cadastrarLocador(){ //validação dos inputs
-    if(!validaCpf(cpf)){
+    if(!validaCpf('cpf')){
         return
     }
 
-    if(!validaNomeLocador(nome)){
+    if(!validaNomeLocador('nome')){
         return
     }
-}
+
+	let body = {
+		//LOCADOR
+		'Cpf':            		document.getElementById('cpf').value,
+		'Nome':           		document.getElementById('nome').value,
+	};
+	
+
     //json
 
 
-    fetch(url + "locadores",
+    fetch(url + "locador/cadastrar",
 	{
 		'method': 'POST',
 		'redirect': 'follow',
@@ -572,10 +334,11 @@ function cadastrarLocador(){ //validação dos inputs
 		console.log(error)
 		alert('Não foi possivel cadastrar o Locador!')
 	})
+}
 
 function validaCpf(id){
-    let divCpf = document.getElementById(cpf)
-	if(divCpf.value.trim().split(' ').length >= 2)
+    let divCpf = document.getElementById(id)
+	if(divCpf.value.trim().length >= 0)
 	{
 	    divCpf.classList.remove('erro-input')
 	    return true
@@ -591,8 +354,8 @@ function validaCpf(id){
 }
 
 function validaNomeLocador(id){
-    let divNome = document.getElementById(nome)
-    if(divNome.value.trim().split(' ').length >= 2)
+    let divNome = document.getElementById(id)
+    if((divNome.value.trim().length >= 0))
     {
     divNome.classList.remove('erro-input')
     return true
@@ -608,9 +371,9 @@ function validaNomeLocador(id){
 }
 
 function listarLocador(){
-    fetch(url + 'locadores')
+    fetch(url + 'locador')
     .then(response => response.json())
-	.then((Locadores) => {
+	.then((locadores) => {
         let listaLocadores = document.getElementById('lista-locadores')
 
         while(listaLocadores.firstChild){
@@ -634,13 +397,13 @@ function listarLocador(){
             //botão remove
             let btnRemover = document.createElement('button')
 			btnRemover.innerHTML = 'Remover'
-			btnRemover.onclick = u => remover(locador.id)
+			btnRemover.onclick = u => removerLocador(locador.id)
 			btnRemover.style.marginRight = '5px'
 
             //botão atualizar
             let btnAtualizar = document.createElement('button')
 			btnAtualizar.innerHTML = 'Atualizar'
-			btnAtualizar.onclick = u => atualizar(locador.id, divCpf, divNome)
+			btnAtualizar.onclick = u => atualizarLocador(locador.id, divCpf, divNome)
 			btnAtualizar.style.marginLeft = '5px'
 
             //div com botoes
@@ -648,7 +411,7 @@ function listarLocador(){
 			divBotoes.style.display = 'flex'
 			divBotoes.appendChild(btnRemover)
 			divBotoes.appendChild(btnAtualizar)
-			divUsuario.appendChild(divBotoes)
+			divLocadores.appendChild(divBotoes)
 
             listaLocadores.appendChild(divLocadores)
         }
@@ -663,7 +426,7 @@ function atualizarLocador(id, divCpf, divNome)
 		'Nome': divNome.value,
 	}
 	
-	fetch(url + "locadores/" + id,
+	fetch(url + "locador/atualizar/" + id,
 	{
 		'method': 'PUT',
 		'redirect': 'follow',
@@ -703,7 +466,7 @@ function atualizarLocador(id, divCpf, divNome)
 
 function removerLocador(id)
 {
-	fetch(url + 'locadores/' + id,
+	fetch(url + 'locador/deletar/' + id,
 	{
 		'method': 'DELETE',
 		'redirect': 'follow'
@@ -731,7 +494,7 @@ function removerLocador(id)
 	.catch((error) =>
 	{
 		console.log(error)
-		alert('Não foi possível remover o Locador')
+		alert('Não foi possível Remover o Locador')
 	})
 }
 
@@ -739,7 +502,7 @@ function removerLocador(id)
 function option()
 {
 	
-	fetch(url + 'locadores')
+	fetch(url + 'locador')
 	.then(response => response.json())
 	.then((locadores) =>
 	{
@@ -754,3 +517,257 @@ function option()
 		}
 	})
 }
+
+
+
+// FUNÇÕES LOCAÇÕES 
+
+function cadastrarLocacao(){
+	if(!validaidLocador('idLocador')){
+		return
+	}
+
+	if(!validaidTerno('idTerno')){
+		return
+	}
+
+let body = {
+	/*TERNO
+	'Modelo':            	document.getElementById('modelo').value,
+	'Cor':               	document.getElementById('cor').value,
+	'Tamanho':           	document.getElementById('tamanho').value,
+	'Status':          	 	document.getElementById('status').value,
+
+	//LOCADOR
+	'Cpf':            		document.getElementById('cpf').value,
+	'Nome':           		document.getElementById('nome').value,
+*/
+	//LOCACAO
+	'IdLocador':            document.getElementById('idLocador').value,
+	'IdTerno':           	document.getElementById('idTerno').value
+
+};
+
+fetch(url + "locacao/cadastrar/",
+	{
+		'method': 'POST',
+		'redirect': 'follow',
+		'headers':
+		{
+			'Content-Type': 'application/json',
+			'Accept': 'application/json'
+		},
+		'body': JSON.stringify(body)
+	})
+
+	.then((response) =>
+	{
+		if(response.ok)
+		{
+			return response.text()
+		}
+		else
+		{
+			return response.text().then((text) =>
+			{
+				throw new Error(text)
+			})
+		}
+	})
+
+	.then((output) =>
+	{
+		console.log(output)
+		alert('Locação cadastrada com sucesso!')
+	})
+
+	.catch((error) =>
+	{
+		console.log(error)
+		alert('Não foi possivel cadastrar a locação!')
+	})
+
+}
+function validaidLocador(id){
+	let divIdLocador = document.getElementById(id)
+	if(divIdLocador.value.trim().length >= 0)
+	{
+		divIdLocador.classList.remove('erro-input')
+		return true
+	}
+	else
+	{
+		if(!divIdLocador.classList.contains('erro-input'))
+		{
+			divIdLocador.classList.add('erro-input')
+		}
+		return false
+	}
+}
+
+function validaidTerno(id){
+	let divIdTerno = document.getElementById(id)
+	if(divIdTerno.value.trim().length >= 0)
+	{
+		divIdTerno.classList.remove('erro-input')
+		return true
+	}
+	else
+	{
+		if(!divIdTerno.classList.contains('erro-input'))
+		{
+			divIdTerno.classList.add('erro-input')
+		}
+		return false
+	}
+}
+
+function listarLocacoes(){
+    fetch(url + 'locacao')
+    .then(response => response.json())
+	.then((locacoes) => {
+        let listaLocacoes = document.getElementById('lista-locacoes')
+
+        while(listaLocacoes.firstChild){
+            listaLocacoes.removeChild(listaLocacoes.firstChild)
+        }
+
+        for(let locacao of locacoes){
+            let divLocacoes = document.createElement('div')
+            divLocacoes.setAttribute('class', 'form')
+
+            let divIdLocador = document.createElement('input')
+			divIdLocador.placeholder = 'IdLocador'
+			divIdLocador.value = locacao.idLocador
+			divLocacoes.appendChild(divIdLocador)
+
+            let divIdTerno = document.createElement('input')
+			divIdTerno.placeholder = 'IdTerno'
+			divIdTerno.value = locacao.idTerno
+			divLocacoes.appendChild(divIdTerno)
+
+            //botão remove
+            let btnRemover = document.createElement('button')
+			btnRemover.innerHTML = 'Remover'
+			btnRemover.onclick = u => removerLocacao(locacao.id)
+			btnRemover.style.marginRight = '5px'
+
+            //botão atualizar
+            let btnAtualizar = document.createElement('button')
+			btnAtualizar.innerHTML = 'Atualizar'
+			btnAtualizar.onclick = u => atualizarLocacao(locacao.id, divIdLocador, divIdTerno)
+			btnAtualizar.style.marginLeft = '5px'
+
+            //div com botoes
+            let divBotoes = document.createElement('div')
+			divBotoes.style.display = 'flex'
+			divBotoes.appendChild(btnRemover)
+			divBotoes.appendChild(btnAtualizar)
+			divLocacoes.appendChild(divBotoes)
+
+            listaLocacoes.appendChild(divLocacoes)
+        }
+    })
+}
+
+function atualizarLocacao(id, divIdLocador, divIdTerno)
+{
+	let body =
+	{
+		'IdLocador': divIdLocador.value,
+		'IdTerno': divIdTerno.value,
+	}
+	
+	fetch(url + "locacao/atualizar/" + id,
+	{
+		'method': 'PUT',
+		'redirect': 'follow',
+		'headers':
+		{
+			'Content-Type': 'application/json',
+			'Accept': 'application/json'
+		},
+		'body': JSON.stringify(body)
+	})
+	.then((response) =>
+	{
+		if(response.ok)
+		{
+			return response.text()
+		}
+		else
+		{
+			return response.text().then((text) =>
+			{
+				throw new Error(text)
+			})
+		}
+	})
+	.then((output) =>
+	{
+		listarLocacoes()
+		console.log(output)
+		alert('Locação Atualizada!')
+	})
+	.catch((error) =>
+	{
+		console.log(error)
+		alert('Não foi possível atualizar Locação!')
+	})
+}
+
+function removerLocacao(id)
+{
+	fetch(url + 'locacao/deletar/' + id,
+	{
+		'method': 'DELETE',
+		'redirect': 'follow'
+	})
+	.then((response) =>
+	{
+		if(response.ok)
+		{
+			return response.text()
+		}
+		else
+		{
+			return response.text().then((text) =>
+			{
+				throw new Error(text)
+			})
+		}
+	})
+	.then((output) =>
+	{
+		listarLocacoes()
+		console.log(output)
+		alert('Locação Removida!')
+	})
+	.catch((error) =>
+	{	
+		listarLocacoes()
+		console.log(error)
+		alert('Não foi possível remover a Locação!')
+	})
+}
+
+
+function option()
+{
+	
+	fetch(url + 'locacao')
+	.then(response => response.json())
+	.then((locacoes) =>
+	{
+		let selLocacoes = document.getElementById('option-locacoes')
+				
+		for(let locacao of locacoes)
+		{
+			let optLocacao = document.createElement('option')
+			optLocacao.innerHTML = locacao.idLocador
+			optLocacao.value = locacao.id
+			selLocacoes.appendChild(optLocacao)
+		}
+	})
+}
+

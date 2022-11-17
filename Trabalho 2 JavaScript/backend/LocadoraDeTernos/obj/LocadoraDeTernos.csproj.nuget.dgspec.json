@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2\\Trabalho 2\\LocadoraDeTernos\\LocadoraDeTernos.csproj": {}
+    "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2 - Versão Rafael 1\\Trabalho 2 JavaScript\\backend\\LocadoraDeTernos\\LocadoraDeTernos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2\\Trabalho 2\\LocadoraDeTernos\\LocadoraDeTernos.csproj": {
+    "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2 - Versão Rafael 1\\Trabalho 2 JavaScript\\backend\\LocadoraDeTernos\\LocadoraDeTernos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2\\Trabalho 2\\LocadoraDeTernos\\LocadoraDeTernos.csproj",
+        "projectUniqueName": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2 - Versão Rafael 1\\Trabalho 2 JavaScript\\backend\\LocadoraDeTernos\\LocadoraDeTernos.csproj",
         "projectName": "LocadoraDeTernos",
-        "projectPath": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2\\Trabalho 2\\LocadoraDeTernos\\LocadoraDeTernos.csproj",
+        "projectPath": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2 - Versão Rafael 1\\Trabalho 2 JavaScript\\backend\\LocadoraDeTernos\\LocadoraDeTernos.csproj",
         "packagesPath": "C:\\Users\\Pc-user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2\\Trabalho 2\\LocadoraDeTernos\\obj\\",
+        "outputPath": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2 - Versão Rafael 1\\Trabalho 2 JavaScript\\backend\\LocadoraDeTernos\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Pc-user\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -39,6 +39,8 @@
           "targetAlias": "net6.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.0, )"
             },

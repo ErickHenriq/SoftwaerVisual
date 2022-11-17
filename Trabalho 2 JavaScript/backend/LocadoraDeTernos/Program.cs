@@ -46,6 +46,8 @@ class Locacao{
 		public int IdTerno { get ; set; }
 
 		public int IdLocador { get ; set; }
+		
+		public string? Status { get ; set; }
 
 		public DateTime DatadeEntrega;
 
@@ -229,19 +231,21 @@ class Locacao{
 
             //atualizar um locadores
 
-			app.MapPost("/locador/atualizar/{id}", (Locadora baselocadores, locador locadorAtualizado, int id) =>
+			app.MapPut("/locador/atualizar/{id}", (Locadora baselocadores, locador locadorAtualizado, int id) =>
 
 			{
 
 				var locador = baselocadores.locadores.Find(id);
 
-				locador.Nome = locadorAtualizado.Nome;
+				if(locador == null){
+					return Results.NotFound();
+				}
 
-                locador.Cpf = locadorAtualizado.Cpf;
-
+				if(null != locadorAtualizado.Cpf)         locador.Cpf         = locadorAtualizado.Cpf;
+				if(null != locadorAtualizado.Nome)        locador.Nome        = locadorAtualizado.Nome;
 				baselocadores.SaveChanges();
+				return Results.Ok();
 
-				return "Locador atualizado";
 
 			});
 
@@ -249,11 +253,18 @@ class Locacao{
 
             //deletar um locadores
 
-			app.MapGet("/locador/deletar/{id}", (Locadora baselocadores, int id) =>
-
+			app.MapDelete("/locador/deletar/{id}", (Locadora baselocadores, int id) =>
 			{
+				var locador = baselocadores.locadores.Find(id);
+				if(locador == null){
+					return Results.NotFound();
+				}
 
 
+				baselocadores.Remove(locador);
+				baselocadores.SaveChanges();
+				return Results.Ok();
+				/*
 				var locador = baselocadores.locadores.Find(id);
 
 				baselocadores.Remove(locador);
@@ -261,7 +272,7 @@ class Locacao{
 				baselocadores.SaveChanges();
 
 				return "Locador removido";
-
+*/
 			});
 
 
@@ -296,12 +307,13 @@ class Locacao{
 
             //cadastrar um novo Locação
 
+			
 			app.MapPost("/locacao/cadastrar", (Locadora baselocacao, Locacao novoLocacao) =>
 
 			{
 
-				locacao.DatadeEntrega = DatadeEntrega.AddDays(15);
-				locacao.Status = "Disponivel";
+				novoLocacao.DatadeEntrega = new DateTime().AddDays(15);
+				novoLocacao.Status = "Disponivel";
 				baselocacao.locacoes.Add(novoLocacao);
 				baselocacao.SaveChanges();
 
@@ -313,20 +325,20 @@ class Locacao{
 
 
             //atualizar um Locação
-
-			app.MapPost("/locacao/atualizar/{id}", (Locadora baselocacao, Locacao locacaoAtualizada, int id) =>
+			app.MapPut("/locacao/atualizar/{id}", (Locadora baselocacao, Locacao locacaoAtualizada, int id) =>
 
 			{
 
 				var locacao = baselocacao.locacoes.Find(id);
 
-				locacao.IdLocador = locacaoAtualizada.IdLocador;
-                locacao.IdTerno = locacaoAtualizada.IdTerno;
-				locacao.Status = locacaoAtualizada.Status;
+				if(locacao == null){
+					return Results.NotFound();
+				}
 
+				if(null != locacaoAtualizada.IdLocador)         locacao.IdLocador         = locacaoAtualizada.IdLocador;
+				if(null != locacaoAtualizada.IdTerno)           locacao.IdTerno           = locacaoAtualizada.IdTerno;
 				baselocacao.SaveChanges();
-
-				return "locacao atualizada";
+				return Results.Ok();
 
 			});
 
@@ -334,19 +346,18 @@ class Locacao{
 
             //deletar um Locação
 
-			app.MapPost("/locacao/deletar/{id}", (Locadora baselocacao, int id) =>
+			app.MapDelete("/locacao/deletar/{id}", (Locadora baselocacao, int id) =>
 
 			{
-
 				var locacao = baselocacao.locacoes.Find(id);
+				if(locacao == null){
+					return Results.NotFound();
+				}
+
 
 				baselocacao.Remove(locacao);
-
 				baselocacao.SaveChanges();
-
-
-				return "Locação removida";
-
+				return Results.Ok();
 			});
 
 

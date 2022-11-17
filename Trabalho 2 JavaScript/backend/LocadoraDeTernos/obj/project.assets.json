@@ -5,7 +5,7 @@
       "Humanizer.Core/2.8.26": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Humanizer.dll": {
+          "lib/netstandard2.0/_._": {
             "related": ".xml"
           }
         },
@@ -82,7 +82,7 @@
           "Microsoft.EntityFrameworkCore.Relational": "6.0.0"
         },
         "compile": {
-          "lib/net6.0/Microsoft.EntityFrameworkCore.Design.dll": {
+          "lib/net6.0/_._": {
             "related": ".xml"
           }
         },
@@ -1435,11 +1435,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2\\Trabalho 2\\LocadoraDeTernos\\LocadoraDeTernos.csproj",
+      "projectUniqueName": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2 - Versão Rafael 1\\Trabalho 2 JavaScript\\backend\\LocadoraDeTernos\\LocadoraDeTernos.csproj",
       "projectName": "LocadoraDeTernos",
-      "projectPath": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2\\Trabalho 2\\LocadoraDeTernos\\LocadoraDeTernos.csproj",
+      "projectPath": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2 - Versão Rafael 1\\Trabalho 2 JavaScript\\backend\\LocadoraDeTernos\\LocadoraDeTernos.csproj",
       "packagesPath": "C:\\Users\\Pc-user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2\\Trabalho 2\\LocadoraDeTernos\\obj\\",
+      "outputPath": "C:\\Users\\Pc-user\\Desktop\\00 - FACULDADE\\Desenvolvimento de Software Visual\\Trabalho 2 - Versão Rafael 1\\Trabalho 2 JavaScript\\backend\\LocadoraDeTernos\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Pc-user\\AppData\\Roaming\\NuGet\\NuGet.Config"
